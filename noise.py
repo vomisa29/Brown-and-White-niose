@@ -39,22 +39,25 @@ def WhiteNoiseBM(x,n,seed):
         i+=1
     return None
         
-#Datos del programa
-n=1700
-
-y=[0]*n
-seed=100
-WhiteNoiseBM(y,n,seed)
-x=list(range(n))
-    
-plt.plot(x,y)
-plt.show()
-
 def GaussianNoise(n):
     y=[]
     for i in range(0,n):
         y.append(Gauss()/n**2)#*i)   
     return y
-plt.plot(x,GaussianNoise(n))
+
+#Datos del programa
+fig, ax = plt.subplots(1,2,layout='constrained')
+n= int(input("Digite el tamaño del set de datos: "))
+seed=random.uniform(0,10000)
+y=[0]*n
+WhiteNoiseBM(y,n,seed)
+x=list(range(n))
+    
+ax[0].plot(x,y,label="Brown Noise")
+
+ax[1].plot(x,GaussianNoise(n),label="White Noise",color="r")
+ax[0].legend()
+ax[1].legend()
+fig.suptitle('Noise')
 plt.show()
 print("YA ACABO")
